@@ -525,116 +525,12 @@ WHERE TC.PRODUCTO_ID = P.PRODUCTO_ID;
 /
 SELECT * FROM FIDE_INFO_TIPO_COMPRA_PRODUCTO_V;
 
----------------------------------------------------------------------------------------------------------------------------------------------------
---Procedimientos Almacenados y Sequencias 
---Citas
---Sequencia de citas
-CREATE SEQUENCE INSERTAR_CITA_SEQ
-START WITH 1
-INCREMENT BY 1; 
---VISUALIZAR SEQUENCIA 
-SELECT INSERTAR_CITA_SEQ.NEXTVAL AS SECUENCIA FROM FIDE_CITA_TB; 
---Procedimiento de insert de citas
-CREATE OR REPLACE PROCEDURE INSERTAR_CITA_SP(
-    P_USUARIO_ID IN NUMBER,
-    P_SERVICIO_ID IN NUMBER,
-    P_ESTADO_ID IN NUMBER,
-    P_FECHA IN DATE,
-    P_HORA IN VARCHAR2
-) AS
-BEGIN
-    INSERT INTO FIDE_CITA_TB (
-        CITA_ID,
-        USUARIO_ID,
-        SERVICIO_ID,
-        ESTADO_ID,
-        FECHA,
-        HORA
-    )
-    VALUES (
-        INSERTAR_CITA_SEQ.NEXTVAL, 
-        P_USUARIO_ID,
-        P_SERVICIO_ID,
-        P_ESTADO_ID,
-        P_FECHA,
-        P_HORA
-    );
-    
-    COMMIT; 
-END;
-/
---Mostrar procedimiento de insertar las citas 
-BEGIN
-    INSERTAR_CITA_SP(
-        P_USUARIO_ID => 1,
-        P_SERVICIO_ID => 2,
-        P_ESTADO_ID => 1,
-        P_FECHA => TO_DATE('2024-11-22', 'YYYY-MM-DD'),
-        P_HORA => '10:00 AM'
-    );
-END;
-/
-
---Procedimiento de modificar de citas
-CREATE OR REPLACE PROCEDURE MODIFICAR_CITA_SP(
-    P_CITA_ID IN NUMBER, 
-    P_USUARIO_ID IN NUMBER,
-    P_SERVICIO_ID IN NUMBER,
-    P_ESTADO_ID IN NUMBER,
-    P_FECHA IN DATE,
-    P_HORA IN VARCHAR2
-) AS
-BEGIN
-    UPDATE FIDE_CITA_TB
-    SET
-        USUARIO_ID = P_USUARIO_ID,
-        SERVICIO_ID = P_SERVICIO_ID,
-        ESTADO_ID = P_ESTADO_ID,
-        FECHA = P_FECHA,
-        HORA = P_HORA
-    WHERE CITA_ID = P_CITA_ID;
-    COMMIT; 
-END;
-/
---Mostrar procedimiento de modificar las citas 
-BEGIN
-    MODIFICAR_CITA_SP(
-        P_CITA_ID => 6, 
-        P_USUARIO_ID => 2,
-        P_SERVICIO_ID => 2,
-        P_ESTADO_ID => 2,
-        P_FECHA => TO_DATE('2024-12-01', 'YYYY-MM-DD'),
-        P_HORA => '11:30 AM'
-    );
-END;
-/
---Procedimiento de eliminar de citas
-CREATE OR REPLACE PROCEDURE ELIMINAR_CITA_SP(
-    P_CITA_ID IN NUMBER 
-) AS
-BEGIN
-    DELETE FROM FIDE_CITA_TB
-    WHERE CITA_ID = P_CITA_ID;
-    COMMIT; 
-END;
-/
---Mostrar procedimiento de eliminar las citas 
-BEGIN
-    ELIMINAR_CITA_SP(
-        P_CITA_ID => 6
-    );
-END;
-/
 
 
--------
--- Procedimiento para obtener toda la información de la tabla cursos
-CREATE OR REPLACE PROCEDURE GET_CURSOS(p_resultado OUT SYS_REFCURSOR)
-AS
-BEGIN
-    OPEN p_resultado FOR 
-        SELECT * FROM AdminDB.FIDE_CURSO_TB;
-END GET_CURSOS;
+
+
+
+
 
 
 

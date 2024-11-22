@@ -15,14 +15,12 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     </head>
     <body>
-         <section th:fragment="navTabs" id="navbar">
-        <nav>
+        <section th:fragment="navTabs" id="navbar">
+            <nav>
                 <div class="navbar">
                     <i class='bx bx-menu'></i>
                     <div class="logo">
-                        <a th:href="@{/}">
-                            <img src="/images/Logo.png" alt="Logo"/>
-                        </a>
+                        <img th:src="@{/images/Logo.png}" alt="Logo"/>
                     </div>
                     <div class="nav-links" role="navigation">
                         <div class="sidebar-logo">
@@ -30,24 +28,24 @@
                             <i class="bx bx-x"></i>
                         </div>
                         <ul class="links">
-                            <li><a href="#">Catálogo</a></li>
+                            <li><a th:href="@{/catalogo/fragmentos-catalogo}">Catálogo</a></li>
                             <li><a href="#">Servicios</a></li>
-                            <li><a th:href="@{/curso/listado}">Cursos</a></li>
+                            <li><a href="#">Cursos</a></li>
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Contacto</a></li>
                         </ul>
                     </div>
                     <div class="cart">
                         <a th:href="@{/}">
-                            <img src="\images\carrito.png" alt="Carrito"/>
+                            <img th:src="@{/images/carrito.png}" alt="Carrito"/>
                         </a>
                     </div>
                 </div>
             </nav>
-        <nav class="navbar-second flex">
+            <nav class="navbar-second flex">
                 <div class="right flex">
                     <ul>
-                        <li class="login" >
+                        <li class="login">
                             <a th:href="@{/}">Iniciar sesión</a>
                         </li>
                         <li>
@@ -59,10 +57,11 @@
                 </div>
             </nav>
         </section>
-        
-        <footer th:fragment="footer" class="footer">
-    <p>&copy; 2024 Cosa Verde Todos los derechos reservados.</p>
-    </footer>
 
+        <header th:replace="layout/plantilla :: header"></header>
+        
+        <section th:replace="producto/fragmentos :: editarProducto"></section>
+        
+        <footer th:replace="layout/plantilla :: footer"></footer>
     </body>
 </html>
