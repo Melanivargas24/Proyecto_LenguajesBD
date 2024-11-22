@@ -627,6 +627,15 @@ END;
 /
 
 
+-------
+-- Procedimiento para obtener toda la información de la tabla cursos
+CREATE OR REPLACE PROCEDURE GET_CURSOS(p_resultado OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN p_resultado FOR 
+        SELECT * FROM AdminDB.FIDE_CURSO_TB;
+END GET_CURSOS;
+
 
 
 
