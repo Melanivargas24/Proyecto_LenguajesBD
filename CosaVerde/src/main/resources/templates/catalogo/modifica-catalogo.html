@@ -13,15 +13,14 @@
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-         
     </head>
     <body>
         <section th:fragment="navTabs" id="navbar">
-        <nav>
+            <nav>
                 <div class="navbar">
                     <i class='bx bx-menu'></i>
                     <div class="logo">
-                        <img th:href="@{/}" src="\images\Logo.png" alt="Logo"/>
+                        <img th:src="@{/images/Logo.png}" alt="Logo"/>
                     </div>
                     <div class="nav-links" role="navigation">
                         <div class="sidebar-logo">
@@ -29,7 +28,7 @@
                             <i class="bx bx-x"></i>
                         </div>
                         <ul class="links">
-                            <li><a href="/catalogo/listado-catalogo">Catálogo</a></li>
+                            <li><a th:href="@{/catalogo/fragmentos-catalogo}">Catálogo</a></li>
                             <li><a href="#">Servicios</a></li>
                             <li><a href="#">Cursos</a></li>
                             <li><a href="#">FAQ</a></li>
@@ -38,15 +37,15 @@
                     </div>
                     <div class="cart">
                         <a th:href="@{/}">
-                            <img src="\images\carrito.png" alt="Carrito"/>
+                            <img th:src="@{/images/carrito.png}" alt="Carrito"/>
                         </a>
                     </div>
                 </div>
             </nav>
-        <nav class="navbar-second flex">
+            <nav class="navbar-second flex">
                 <div class="right flex">
                     <ul>
-                        <li class="login" >
+                        <li class="login">
                             <a th:href="@{/}">Iniciar sesión</a>
                         </li>
                         <li>
@@ -58,55 +57,11 @@
                 </div>
             </nav>
         </section>
-        <section class="main swiper mySwiper">
-      <div class="wrapper swiper-wrapper">
-        <div class="slide swiper-slide">
-          <img src="images/CosaVerde.jpg" alt="" class="image" />
-        </div>
-        <div class="slide swiper-slide">
-          <img src="images/img2.jpg" alt="" class="image" />
-        </div>
-      </div>
 
-      <div class="swiper-button-next nav-btn"></div>
-      <div class="swiper-button-prev nav-btn"></div>
-      <div class="swiper-pagination"></div>
-    </section>
-      
-      <div class="cards-container">
-          <div class="card">
-              <img src="images/cactus.jpg" alt="Cactus" />
-              <h3>Cactus</h3>
-              <button>Comprar</button>
-          </div>
-          <div class="card">
-              <img src="images/plantas.jpg" alt="Plantas" />
-              <h3>Plantas</h3>
-              <button>Comprar</button>
-          </div>
-          <div class="card">
-              <img src="images/suculentas.jpg" alt="Suculentas" />
-              <h3>Suculentas</h3>
-              <button>Comprar</button>
-          </div>
-      </div>
+        <header th:replace="layout/plantilla :: header"></header>
         
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- Initialize Swiper -->
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      });
-    </script>
-  </body>
+        <section th:replace="producto/fragmentos :: editarProducto"></section>
+        
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
 </html>
