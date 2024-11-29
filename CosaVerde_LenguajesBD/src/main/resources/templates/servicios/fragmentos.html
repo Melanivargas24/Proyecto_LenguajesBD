@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Cosa Verde</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/css/style.css}" rel="stylesheet" />  
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+
+
+    </head>
+    <body>
+        <div class="servicios" th:fragment="contenidoServicios">
+            <div class="container mt-4">
+                <h2 style="margin-top: 120px; margin-left:-250px;">Servicios</h2>
+
+
+                <!-- Botón para abrir el modal -->
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarServicioModal" style="margin-left: -250px;">
+                    Agregar Servicio
+                </button>
+
+                <!-- Modal para agregar servicio -->
+                <div class="modal fade" id="agregarServicioModal" tabindex="-1" role="dialog"
+                     aria-labelledby="agregarServicioModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="agregarServicioModalLabel">Agregar Servicio</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario para agregar servicio -->
+                                <form th:action="@{/servicios/agregar}" th:object="${servicio}" method="post">
+                                    <div class="form-group">
+                                        <label for="nombreServicio">Nombre</label>
+                                        <input type="text" class="form-control" th:field="*{nombre}"
+                                               placeholder="Ingrese el nombre del servicio" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="descripcionServicio">Descripción</label>
+                                         <input type="text" class="form-control" th:field="*{descripcion}"
+                                               placeholder="Ingrese la descripcion" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="imagenServicio">URL Imagen</label>
+                                        <input type="text" class="form-control" th:field="*{imagen}"
+                                               placeholder="Ingrese la imagen" required>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar Servicio</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de listado de servicios -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="servicio : ${servicios}">
+                        <th scope="row" th:text="${servicio.idServicio}">1</th>
+                        <td th:text="${servicio.nombre}">Nombrel servicio</td>
+                        <td th:text="${servicio.descripcion}">Descripción del servicio</td>
+                        <td th:text="${servicio.imagen}">Imagen del servicio</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{/servicios/editar/{id}(id=${servicio.idServicio})}"><i
+                                    class="fas fa-edit"></i>Editar</a>
+
+                            <a class="btn btn-sm btn-danger"
+                               th:href="@{/servicios/eliminar/{id}(id=${servicio.idServicio})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div th:fragment="contenidoEditarServicio">
+            <h2 style="margin-top: 170px; margin-left:-250px;">Editar Servicio</h2>
+            <form th:action="@{/servicios/editar}" th:object="${servicio}" method="post">
+                <input type="hidden" th:field="*{idServicio}" />
+                <div class="form-group1">
+                    <label for="nombreServicio">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}"
+                           placeholder="Ingrese el nombre del servicio" required />
+                </div>
+                <div class="form-group1">
+                    <label for="descripcionServicio">Descripción</label>
+                    <input type="text" class="form-control" th:field="*{descripcion}"
+                           placeholder="Ingrese la descripcion del servicio" required />
+                </div>
+                <div class="form-group1">
+                    <label for="imagenServicio">URL de la imagen</label>
+                    <input type="text" class="form-control" th:field="*{imagen}"
+                           placeholder="Ingrese la imagen" required />
+                </div>
+        
+                <button type="submit" class="btn btn-primary" style="margin-top: 15px; margin-left:-250px;">Guardar Cambios</button>
+            </form>
+        </div>
+        
+        
+
+
+
+    </body>
+
+
+</html>

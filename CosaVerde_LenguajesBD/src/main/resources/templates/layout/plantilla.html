@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+   <head th:fragment="head">
+        <title>DataTech</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/css/style.css}" rel="stylesheet" />  
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+
+
+    <body>
+         <section th:fragment="navTabs" id="navbar">
+        <nav>
+                <div class="navbar">
+                    <i class='bx bx-menu'></i>
+                    <div class="logo">
+                        <a th:href="@{/}">
+                            <img src="/images/Logo.png" alt="Logo"/>
+                        </a>
+                    </div>
+                    <div class="nav-links" role="navigation">
+                        <div class="sidebar-logo">
+                            <h1 class="logo-name">CosaVerde</h1> 
+                            <i class="bx bx-x"></i>
+                        </div>
+                        <ul class="links">
+                            <li><a href="/productos">Catálogo</a></li>
+                            <li><a  th:href="@{/servicios}">Servicios</a></li>
+                            <li><a th:href="@{/cursos}">Cursos</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="cart">
+                        <a th:href="@{/}">
+                            <img src="/images/carrito.png" alt="Carrito"/>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        <nav class="navbar-second flex">
+                <div class="right flex">
+                    <ul>
+                        <li class="login" >
+                            <a th:href="@{/categorias}">Categorías</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/inventarios}">Inventarios</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/}">Iniciar sesión</a>
+                        </li>
+                        <li>
+                            <div class="register">
+                                <a th:href="@{/}">Registrarse</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </section>
+        
+        <footer th:fragment="footer" class="footer">
+    <p>&copy; 2024 Cosa Verde Todos los derechos reservados.</p>
+    </footer>
+
+    </body>
+</html>

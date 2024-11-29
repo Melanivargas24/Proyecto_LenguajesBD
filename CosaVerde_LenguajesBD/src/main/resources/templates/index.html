@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Cosa Verde</title>
+        <meta charset="UTF-8"/>
+        <link th:href="@{/css/style.css}" rel="stylesheet" /> 
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        
+    </head>
+    <body>
+       <header th:replace="~{layout/plantilla :: navTabs}"/>
+       
+       
+        <section class="main swiper mySwiper">
+      <div class="wrapper swiper-wrapper">
+        <div class="slide swiper-slide">
+          <img src="images/CosaVerde.jpg" alt="" class="image" />
+        </div>
+        <div class="slide swiper-slide">
+          <img src="images/img2.jpg" alt="" class="image" />
+        </div>
+      </div>
+
+      <div class="swiper-button-next nav-btn"></div>
+      <div class="swiper-button-prev nav-btn"></div>
+      <div class="swiper-pagination"></div>
+    </section>
+      
+      <div class="cards-container">
+          <div class="card">
+              <img src="images/cactus.jpg" alt="Cactus" />
+              <h3>Cactus</h3>
+              <button>Ver catálogo</button>
+          </div>
+          <div class="card">
+              <img src="images/plantas.jpg" alt="Plantas" />
+              <h3>Plantas</h3>
+              <button>Ver catálogo</button>
+          </div>
+          <div class="card">
+              <img src="images/suculentas.jpg" alt="Suculentas" />
+              <h3>Suculentas</h3>
+              <button>Ver catálogo</button>
+          </div>
+      </div>
+        
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      });
+    </script>
+  </body>
+</html>

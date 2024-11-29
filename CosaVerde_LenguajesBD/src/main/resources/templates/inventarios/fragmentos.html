@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Cosa Verde</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+
+
+    </head>
+
+    <body>
+
+
+        <div th:fragment="contenidoInventario" class="Inventarios">
+            <div class="container mt-4">
+                <h2 style="margin-top: 120px; margin-left:-250px;">Inventarios</h2>
+
+                <!-- Botón para abrir el formulario de agregar inventario -->
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal"
+                        data-target="#agregarInventarioModal" style="margin-left:-250px;">
+                    Agregar Inventario
+                </button>
+                <!-- Modal para agregar inventario -->
+                <div class="modal fade" id="agregarInventarioModal" tabindex="-1" role="dialog"
+                     aria-labelledby="agregarInventarioModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="agregarInventarioModalLabel">Agregar Inventario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario para agregar inventario -->
+                                <form th:action="@{/inventarios/agregar}" th:object="${inventario}" method="post">
+                                    <div class="form-group">
+                                        <label for="productoInventario">Producto</label>
+                                        <select class="form-control" th:field="*{producto.idProducto}">
+                                            <option value="" selected>Seleccione un producto</option>
+                                            <option th:each="producto : ${productos}" th:value="${producto.idProducto}" th:text="${producto.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="stockInventario">Stock</label>
+                                        <input type="number" class="form-control" th:field="*{stock}"
+                                               placeholder="Ingrese la cantidad disponible del producto" min="0" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fechaInventario">Fecha de vencimiento</label>
+                                        <input type="date" class="form-control" th:field="*{fechaVencimiento}" 
+                                               placeholder="Seleccione la fecha de vencimiento" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="díasStock">Días en Stock</label>
+                                        <textarea class="form-control" th:field="*{diasEnStock}" rows="2" placeholder="Número de días en stock" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="precioInventario">Precio Unitario</label>
+                                        <input type="number" class="form-control" th:field="*{precioUnit}"
+                                               placeholder="Ingrese la precio unitario del producto" min="0" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="estadoInventario">Estado</label>
+                                        <select class="form-control" th:field="*{estado.idEstado}">
+                                            <option value="" selected>Seleccione</option>
+                                            <option th:each="estado : ${estados}" th:value="${estado.idEstado}" th:text="${estado.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar Inventario</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de listado de inventarios -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Fecha de vencimiento</th>
+                            <th scope="col"># Días en Stock</th>
+                            <th scope="col">Precio Unitario</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="inventario : ${inventarios}">
+                            <td th:text="${inventario.idInventario}">1</td>
+                            <td th:text="${inventario.producto.nombre}">Nombre del Producto</td>
+                            <td th:text="${inventario.stock}">Stock</td>
+                            <td th:text="${inventario.fechaVencimiento}">Fecha de vencimiento</td>
+                            <td th:text="${inventario.diasEnStock}"># Días en Stock</td>
+                            <td th:text="${inventario.precioUnit}">Precio unitario</td>
+                            <td th:text="${inventario.estado.nombre}">Estado</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary"
+                                   th:href="@{/inventarios/editar/{id}(id=${inventario.idInventario})}"><i class="fas fa-edit"></i>Editar</a>
+                                <a class="btn btn-sm btn-danger"
+                                   th:href="@{/inventarios/eliminar/{id}(id=${inventario.idInventario})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div th:fragment="contenidoEditarInventario">
+            <h2 style="margin-top: 170px; margin-left:-250px;">Editar Inventario</h2>
+            <form th:action="@{/inventarios/editar}" th:object="${inventario}" method="post">
+                <input type="hidden" th:field="*{idInventario}" />
+                <div class="form-group1">
+                    <label for="productoInventario">Producto</label>
+                    <select class="form-control" th:field="*{producto.idProducto}">
+                        <option value="" th:unless="${productos}" th:text="Seleccione un producto"></option>
+                        <option th:each="producto : ${productos}" th:value="${producto.idProducto}"
+                                th:text="${producto.nombre}"
+                                th:selected="${producto.idProducto == inventario.producto.idProducto}"></option>
+                    </select>
+                </div>
+                <div class="form-group1">
+                    <label for="stockInventario">Stock</label>
+                    <input type="number" class="form-control" th:field="*{stock}"
+                           placeholder="Ingrese la cantidad disponible del producto" min="0">
+                </div>
+                <div class="form-group1">
+                    <label for="fechaInventario">Fecha de vencimiento</label>
+                    <input type="date" class="form-control" th:field="*{fechaVencimiento}" 
+                           placeholder="Seleccione la fecha de vencimiento" required>
+                </div>
+                <div class="form-group1">
+                    <label for="díasStock">Días en Stock</label>
+                    <textarea class="form-control" th:field="*{diasEnStock}" rows="2" placeholder="Número de días en stock" required></textarea>
+                </div>
+                <div class="form-group1">
+                    <label for="precioInventario">Precio Unitario</label>
+                    <input type="number" class="form-control" th:field="*{precioUnit}"
+                           placeholder="Ingrese la precio unitario del producto" min="0" required>
+                </div>
+                <div class="form-group1">
+                    <label for="estadoInventario">Estado</label>
+                    <select class="form-control" th:field="*{estado.idEstado}">
+                        <option value="" selected>Seleccione</option>
+                        <option th:each="estado : ${estados}" th:value="${estado.idEstado}" th:text="${estado.nombre}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 15px; margin-left:-250px;">Guardar Cambios</button>
+            </form>
+        </div>
+    </body>
+</html>
