@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla :: head}">
-        <title>Cosa Verde</title>
-        <meta charset="UTF-8"/>
-        <link th:href="@{/css/style.css}" rel="stylesheet" /> 
-        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-        
-    </head>
-    <body>
-       <header th:replace="~{layout/plantilla :: navTabs}"/>
-       
-       
-        <section class="main swiper mySwiper">
+<!-- Coding by CodingLab | www.codinglabweb.com  -->
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosa Verde</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+ <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/nuevo.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+      
+      <div th:replace="~{layout/plantilla :: navTabs}"/>
+  
+    <section class="main swiper mySwiper">
       <div class="wrapper swiper-wrapper">
         <div class="slide swiper-slide">
           <img src="images/CosaVerde.jpg" alt="" class="image" />
@@ -34,20 +35,35 @@
           <div class="card">
               <img src="images/cactus.jpg" alt="Cactus" />
               <h3>Cactus</h3>
-              <button>Ver catálogo</button>
+             <a th:href="@{/catalogo}">
+                  <button>Ver Catálogo</button>
+              </a>
           </div>
           <div class="card">
               <img src="images/plantas.jpg" alt="Plantas" />
               <h3>Plantas</h3>
-              <button>Ver catálogo</button>
+              <a th:href="@{/catalogo}">
+                  <button>Ver Catálogo</button>
+              </a>
+
           </div>
           <div class="card">
               <img src="images/suculentas.jpg" alt="Suculentas" />
               <h3>Suculentas</h3>
-              <button>Ver catálogo</button>
+              <a th:href="@{/catalogo}">
+                  <button>Ver Catálogo</button>
+              </a>
           </div>
       </div>
-        
+
+       
+
+    </section>
+      
+      <footer th:replace="~{layout/plantilla :: footer}"/>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- Initialize Swiper -->

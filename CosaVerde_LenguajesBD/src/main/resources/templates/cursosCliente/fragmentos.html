@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Cursos</title>
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/curso.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body style="background-color: #e1e3de;">
+    <div class="cursos" th:fragment="contenidoCursos">
+        <div class="container mt-4">
+            <h2 style="margin-top: 120px; margin-left:-300px;  font-size: 3rem; font-weight: bold; color: #333;">Cursos</h2>
+
+            <!-- Lista de tarjetas -->
+            <div class="lista-tarjetas">
+                <!-- Tarjetas de cursos -->
+                <div class="tarjeta" th:each="curso : ${cursos}" style="cursor: pointer;" data-toggle="modal" th:data-target="'#modalCurso' + ${curso.idCurso}">
+                    <img th:src="${curso.imagen}" class="imagen-tarjeta" alt="Imagen del curso">
+                    <div class="cuerpo-tarjeta">
+                        <h5 class="card-title" th:text="${curso.tipocurso.nombre}">Nombre del curso</h5>
+                        <p class="card-text">
+                            <strong>Fecha:</strong> <span th:text="${#dates.format(curso.fecha, 'yyyy-MM-dd')}">2024-12-07</span><br>
+                            <strong>Hora:</strong> <span th:text="${curso.hora}">10:00 AM</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventanas modales -->
+        <div th:each="curso : ${cursos}">
+            <div class="modal fade" th:id="'modalCurso' + ${curso.idCurso}" tabindex="-1" role="dialog" aria-labelledby="modalCursoLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" th:text="${curso.tipocurso.nombre}">Nombre del curso</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img th:src="${curso.imagen}" class="imagen-tarjeta" alt="Imagen del curso">
+                            <p><strong>Fecha:</strong> <span th:text="${#dates.format(curso.fecha, 'yyyy-MM-dd')}">2024-12-07</span></p>
+                            <p><strong>Hora:</strong> <span th:text="${curso.hora}">10:00 AM</span></p>
+                            <p><strong>Precio:</strong> ₡<span th:text="${curso.precio}">15000</span></p>
+                            <p><strong>Capacidad:</strong> <span th:text="${curso.capacidad}">30</span> personas</p>
+                            <p><strong>Estado:</strong> <span th:text="${curso.estado.nombre}">Disponible</span></p>
+                            <p><strong>Dirección:</strong> <span th:text="${curso.direccion.senas}">San José, Costa Rica</span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

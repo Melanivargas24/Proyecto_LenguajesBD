@@ -24,7 +24,7 @@ public class Direccion implements Serializable {
     @Column(name = "DIRECCION_ID")
     private Long idDireccion;
 
-    private String señas;
+    private String senas;
 
     @ManyToOne
     @JoinColumn(name = "PROVINCIA_ID")
@@ -37,6 +37,9 @@ public class Direccion implements Serializable {
     @ManyToOne
     @JoinColumn(name = "DISTRITO_ID")
     private Distrito distrito;
+    
+    @OneToMany(mappedBy = "direccion")
+    private List<Curso> cursos;
 
     
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link th:href="@{/css/faq.css}" rel="stylesheet" /> 
+     <link th:href="@{/css/style.css}" rel="stylesheet" /> 
+    <title>Preguntas Frecuentes</title>
+</head>
+<body>
+    <div th:replace="~{layout/plantilla :: navTabs}"/>
+    <h1>Preguntas Frecuentes</h1>
+    <div class="faq-container">
+        <div th:each="faq : ${questions}" class="faq-item">
+            <div class="faq-question" th:text="${faq.question}"></div>
+            <div class="faq-answer" th:text="${faq.answer}"></div>
+        </div>
+    </div>
+</body>
+</html>

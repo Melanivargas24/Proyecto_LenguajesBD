@@ -6,7 +6,7 @@
 }
 body{
   min-height: 100vh;
-  background: #e1e3de;
+  background: white;
 }
 
 nav{
@@ -543,23 +543,22 @@ a.button:hover {
   transform: translateY(-10px);
 }
 
-/*Cursos*/
 h2 {
     font-size: 2rem;
     font-weight: bold;
     color: #4CAF50;
-    margin-bottom: 10px; /* Menor margen */
+    margin-bottom: 10px; 
 }
 
 .table-container {
     display: flex;
-    justify-content: center; /* Centra la tabla horizontalmente */
-    margin-top: 10px; /* Reduce el espacio superior */
+    justify-content: center; 
+    margin-top: 10px; 
 }
 
 table {
-    width: 100%; /* La tabla ocuparÃ¡ el ancho completo del contenedor */
-    border-collapse: collapse; /* Elimina espacios entre bordes */
+    width: 100%; 
+    border-collapse: collapse;
     margin-top: -10px;
     margin-left: -150px;
 }
@@ -575,11 +574,11 @@ table {
 }
 
 .w-75 {
-    width: 75%; /* Ajusta la tabla al 75% del ancho del contenedor */
+    width: 75%; 
 }
 
 .container {
-    max-width: 90%; /* Limita el ancho del contenedor principal */
+    max-width: 90%; 
     margin: auto;
     padding: 20px;
 }
@@ -595,4 +594,25 @@ table {
 .form-group1 {
     margin-left:-250px;
     width:1000px
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 15px; 
+}
+
+.social-icon {
+  text-decoration: none; 
+}
+
+.social-icon i {
+  font-size: 30px;
+  color: white;
+  transition: color 0.3s ease; 
+}
+
+.social-icon:hover i {
+  color: #28a745;
 }

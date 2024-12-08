@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Descuentos</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/css/style.css}" rel="stylesheet" />  
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    </head>
+    <body>
+        <div class="descuentos" th:fragment="contenidoDescuentos">
+            <div class="container mt-4">
+                <h2 style="margin-top: 120px; margin-left:-250px;">Descuentos</h2>
+
+                <!-- Botón para abrir el modal -->
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarDescuentoModal" style="margin-left: -250px;">
+                    Agregar Descuento
+                </button>
+
+                <!-- Modal para agregar descuento -->
+                <div class="modal fade" id="agregarDescuentoModal" tabindex="-1" role="dialog"
+                     aria-labelledby="agregarDescuentoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="agregarDescuentoModalLabel">Agregar Descuento</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulario para agregar descuento -->
+                                <form th:action="@{/descuentos/agregar}" th:object="${descuento}" method="post">
+                                    <div class="form-group">
+                                        <label for="nombreDescuento">Nombre</label>
+                                        <input type="text" class="form-control" th:field="*{nombre}"
+                                               placeholder="Ingrese el nombre del descuento" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="porcentajeDescuento">Porcentaje</label>
+                                        <input type="number" class="form-control" th:field="*{porcentaje}"
+                                               placeholder="Ingrese el porcentaje del descuento" required>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar Descuento</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de listado de descuentos -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Porcentaje</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="descuento : ${descuentos}">
+                        <th scope="row" th:text="${descuento.idDescuento}">1</th>
+                        <td th:text="${descuento.nombre}">Nombre del descuento</td>
+                        <td th:text="${descuento.porcentaje}">10%</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{/descuentos/editar/{id}(id=${descuento.idDescuento})}"><i
+                                    class="fas fa-edit"></i>Editar</a>
+
+                            <a class="btn btn-sm btn-danger"
+                               th:href="@{/descuentos/eliminar/{id}(id=${descuento.idDescuento})}"><i class="fas fa-trash-alt"></i>Eliminar</a>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:fragment="contenidoEditarDescuento">
+            <h2 style="margin-top: 170px; margin-left:-250px;">Editar Descuento</h2>
+            <form th:action="@{/descuentos/editar}" th:object="${descuento}" method="post">
+                <input type="hidden" th:field="*{idDescuento}" />
+                <div class="form-group1">
+                    <label for="nombreDescuento">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}"
+                           placeholder="Ingrese el nombre del descuento" required />
+                </div>
+                <div class="form-group1">
+                    <label for="porcentajeDescuento">Porcentaje</label>
+                    <input type="number" class="form-control" th:field="*{porcentaje}"
+                           placeholder="Ingrese el porcentaje del descuento" required />
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 15px; margin-left:-250px;">Guardar Cambios</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 10px; /* Menor margen */
+}
+
+.table-container {
+    display: flex;
+    justify-content: center; /* Centra la tabla horizontalmente */
+    margin-top: 10px; /* Reduce el espacio superior */
+}
+
+table {
+    width: 100%; /* La tabla ocuparÃ¡ el ancho completo del contenedor */
+    border-collapse: collapse; /* Elimina espacios entre bordes */
+    margin-top: -10px;
+    margin-left: -150px;
+}
+
+.table th, .table td {
+    padding: 15px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.w-75 {
+    width: 75%; /* Ajusta la tabla al 75% del ancho del contenedor */
+}
+
+.container {
+    max-width: 90%; /* Limita el ancho del contenedor principal */
+    margin: auto;
+    padding: 20px;
+}
+
+
+.footer {
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.form-group1 {
+    margin-left:-250px;
+    width:1000px
+}
+
+.total-card {
+    width: 250px; /* Ajusta el ancho */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #198754;
+    margin-left: 20px; /* Espaciado entre la tabla y la tarjeta */
+    height: fit-content; /* Ajusta la altura automáticamente */
+    border-radius: 10px; 
+    margin-right:20px;
+}
+
+.total-card-body {
+    text-align: center;
+    padding: 15px;
+}
+
+.total-card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffff;
+}
+
+.total-card-text {
+    font-size: 1.5rem;
+    color: #ffffff;
+}

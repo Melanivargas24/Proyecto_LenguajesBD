@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Cursos</title>
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="cursos" th:fragment="contenidoCursos">
+     <div class="container mt-4">
+     <h2 style="margin-top: 120px; margin-left:-250px;">Cursos</h2>
+        <!-- Tabla de listado de cursos -->
+        <table class="table">
+            <thead>
+              <tr>
+                    <th scope="col">#</th>
+                     <th scope="col">Nombre</th>
+                     <th scope="col">Descripcion</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Capacidad</th>
+                    <th scope="col">Tipo de Curso</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Dirección</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="curso : ${cursos}">
+                    <th scope="row" th:text="${curso.idCurso}">1</th>
+                    <td th:text="${curso.nombre}">Nombre</td>
+                    <td th:text="${curso.descripcion}">Descripcion</td>
+                    <td th:text="${#dates.format(curso.fecha, 'yyyy-MM-dd')}">Fecha</td>
+                    <td th:text="${curso.hora}">Hora</td>
+                    <td th:text="${curso.imagen}">Imagen del servicio</td>
+                    <td th:text="${curso.precio}">Precio</td>
+                    <td th:text="${curso.capacidad}">Capacidad</td>
+                    <td th:text="${curso.tipocurso.nombre}">Tipo de Curso</td>
+                    <td th:text="${curso.estado.nombre}">Estado</td>
+                    <td th:text="${curso.direccion.senas}">Dirección</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -2,9 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
    <head th:fragment="head">
-        <title>DataTech</title>
+        <title>Cosa Verde</title>
         <meta charset="UTF-8" />
         <link th:href="@{/css/style.css}" rel="stylesheet" />  
+        <link th:href="@{/css/inventarios.css}" rel="stylesheet" />
         <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
         <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -15,6 +16,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
 
 
@@ -34,10 +36,10 @@
                             <i class="bx bx-x"></i>
                         </div>
                         <ul class="links">
-                            <li><a href="/productos">Catálogo</a></li>
-                            <li><a  th:href="@{/servicios}">Servicios</a></li>
-                            <li><a th:href="@{/cursos}">Cursos</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <li><a th:href="@{/catalogo}">Catálogo</a></li>
+                            <li><a  th:href="@{/serviciosCliente}">Servicios</a></li>
+                            <li><a th:href="@{/cursosCliente}">Cursos</a></li>
+                            <li><a th:href="@{/faq}">FAQ</a></li>
                             <li><a href="#">Contacto</a></li>
                         </ul>
                     </div>
@@ -52,7 +54,31 @@
                 <div class="right flex">
                     <ul>
                         <li class="login" >
+                            <a th:href="@{/facturas}">Facturas</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/descuentos}">Descuentos</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/servicios}">Servicios</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/cursos}">Cursos</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/direcciones}">Direcciones</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/citas}">Citas</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/eventos}">Eventos</a>
+                        </li>
+                        <li class="login" >
                             <a th:href="@{/categorias}">Categorías</a>
+                        </li>
+                        <li class="login" >
+                            <a th:href="@{/productos}">Productos</a>
                         </li>
                         <li class="login" >
                             <a th:href="@{/inventarios}">Inventarios</a>
@@ -70,9 +96,22 @@
             </nav>
         </section>
         
-        <footer th:fragment="footer" class="footer">
-    <p>&copy; 2024 Cosa Verde Todos los derechos reservados.</p>
-    </footer>
+<footer th:fragment="footer" class="footer">
+  <p>&copy; 2024 Cosa Verde Todos los derechos reservados.</p>
+  <div class="social-icons">
+    <a href="https://www.tiktok.com/@cosaverdecr?_t=8lQgCRmPhhO&_r=1" target="_blank" class="social-icon">
+      <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://www.instagram.com/cosaverdecr/" target="_blank" class="social-icon">
+      <i class="fab fa-instagram"></i> 
+    </a>
+    <a href="https://bento.me/cosaverde?fbclid=PAZXh0bgNhZW0CMTEAAaZddzQISRwZ-vEJ86aKvW-v66aMO9BtbLVBvq41pSQGA7oKX2oWKj9x48o_aem_e3MtYglQ9RAkBhX5ZKE9pg" target="_blank" class="social-icon">
+      <i class="fa-solid fa-link"></i>
+    </a>
+  </div>
+</footer>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     </body>
 </html>

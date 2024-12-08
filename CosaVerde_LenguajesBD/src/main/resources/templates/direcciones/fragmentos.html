@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Direcciones</title>
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="direcciones" th:fragment="contenidoDirecciones">
+        <div class="container mt-4">
+            <h2 style="margin-top: 120px; margin-left:-250px;">Direcciones</h2>
+
+
+        <!-- Tabla de listado de direcciones -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Provincia</th>
+                    <th scope="col">Cantón</th>
+                    <th scope="col">Distrito</th>
+                    <th scope="col">Señas</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="direccion : ${direcciones}">
+                    <th scope="row" th:text="${direccion.idDireccion}">1</th>
+                    <td th:text="${direccion.provincia.nombre}">Provincia</td>
+                    <td th:text="${direccion.canton.nombre}">Cantón</td>
+                    <td th:text="${direccion.distrito.nombre}">Distrito</td>
+                    <td th:text="${direccion.senas}">Señas detalladas</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</body>
+</html>
