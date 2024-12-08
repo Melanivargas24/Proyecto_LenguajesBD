@@ -17,6 +17,7 @@ import com.cosaverde.domain.Producto;
 import com.cosaverde.service.EstadoService;
 import com.cosaverde.service.InventarioService;
 import com.cosaverde.service.ProductoService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -41,14 +42,23 @@ public class InventarioController {
         var lista = inventarioService.getInventario();
         var listaEstados = estadoService.getEstados();
         var listaProductos = productoService.getProductos();
+        Double totalInventario = inventarioService.obtenerTotalInventario();
+        
         model.addAttribute("inventarios", lista);
         model.addAttribute("estados", listaEstados);
         model.addAttribute("productos", listaProductos);
-
+        model.addAttribute("totalInventario", totalInventario);
         model.addAttribute("inventario", new Inventario());
         
         return "/inventarios/listado";
     }
+    
+    @GetMapping("/total")
+    @ResponseBody
+    public Double obtenerTotalInventario() {
+        return inventarioService.obtenerTotalInventario();
+    }
+
 
     @PostMapping("/agregar")
     public String guardar(Inventario inventario) {

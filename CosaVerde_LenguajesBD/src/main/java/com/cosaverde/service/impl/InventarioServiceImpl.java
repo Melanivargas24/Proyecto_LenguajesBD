@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cosaverde.dao.InventarioDao;
 import com.cosaverde.domain.Inventario;
 import com.cosaverde.service.InventarioService;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
 
 @Service
@@ -53,7 +55,7 @@ public class InventarioServiceImpl implements InventarioService {
     @Transactional
     public void insertarInventario(int stock, Date fechaVencimiento, int diasEnStock, double precioUnit, 
             Long idEstado, Long idProducto) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_PROCEDIMIENTOS_PKG.FIDE_INVENTARIO_TB_INSERTAR_SP");
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_PROCEDIMIENTOS_PKG.FIDE_INVENTARIO_TB_INSERT_SP");
         query.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, Date.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(3, Integer.class, ParameterMode.IN);
@@ -100,4 +102,15 @@ public class InventarioServiceImpl implements InventarioService {
                 .setParameter("P_INVENTARIO_ID", idInventario)
                 .execute();
     }
+ 
+    @Override
+    @Transactional
+    public Double obtenerTotalInventario() {
+        Query query = entityManager.createNativeQuery("SELECT FIDE_INVENTARIO_TOTAL_PRODUCTOS_FN FROM dual");
+        BigDecimal result = (BigDecimal) query.getSingleResult(); 
+        return result.doubleValue();  
+    }
+
+
+
 }

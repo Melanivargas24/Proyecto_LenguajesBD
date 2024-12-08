@@ -17,5 +17,9 @@ public interface InventarioService {
     void actualizarInventario(Long idInventario, int stock, Date fechaVencimiento, int diasEnStock, double precioUnit, Long idEstado, Long idProducto);
     
     void eliminarInventario(Long idInventario);
+    
+    public Double obtenerTotalInventario();
 }
+
+
 
