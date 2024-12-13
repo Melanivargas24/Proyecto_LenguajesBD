@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Agregar Cita</title>
+    <meta charset="UTF-8" />
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+     <div th:fragment="contenidoContacto" class="Contacto">
+    <div class="container mt-4">
+        <h2 style="margin-top: 120px;">Agregar Cita</h2>
+
+        <!-- Formulario para agregar cita -->
+        <form th:action="@{/contacto/agregar}" th:object="${cita}" method="post">
+            <div class="form-group">
+                <label for="fechaCita">Fecha</label>
+                <input type="date" class="form-control" th:field="*{fecha}" placeholder="Seleccione la fecha" required>
+            </div>
+            <div class="form-group">
+                <label for="horaCita">Hora</label>
+                <input type="time" class="form-control" th:field="*{hora}" placeholder="Seleccione la hora" required>
+            </div>
+            <div class="form-group">
+                <label for="estadoCita">Estado</label>
+                <select class="form-control" th:field="*{estado.idEstado}" required>
+                    <option value="" selected>Seleccione un estado</option>
+                    <option th:each="estado : ${estados}" th:value="${estado.idEstado}" th:text="${estado.nombre}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="servicioCita">Servicio</label>
+                <select class="form-control" th:field="*{servicio.idServicio}" required>
+                    <option value="" selected>Seleccione un servicio</option>
+                    <option th:each="servicio : ${servicios}" th:value="${servicio.idServicio}" th:text="${servicio.nombre}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="usuarioCita">Usuario</label>
+                <select class="form-control" th:field="*{usuario.idUsuario}" required>
+                    <option value="" selected>Seleccione un usuario</option>
+                    <option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}" th:text="${usuario.nombre}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Cita</button>
+        </form>
+    </div>
+     </div>
+</body>
+
+</html>

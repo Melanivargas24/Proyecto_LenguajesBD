@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cosaverde.service.DescuentoService;
 import com.cosaverde.dao.DescuentoDao;
 import com.cosaverde.domain.Descuento;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.StoredProcedureQuery;
 
-import javax.persistence.*;
 
 @Service
 public class DescuentoServiceImpl implements DescuentoService {
@@ -46,13 +49,15 @@ public class DescuentoServiceImpl implements DescuentoService {
     }
 
     @Override
-    public void crearDescuento(String nombre, int porcentaje) {
+    public void crearDescuento(String nombre, int porcentaje, String estado) {
        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_PROCEDIMIENTOS_PKG.FIDE_DESCUENTO_TB_INSERTAR_SP");
             query.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
             query.registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN);
+             query.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
             
             query.setParameter(1, nombre);
             query.setParameter(2, porcentaje);
+            query.setParameter(3, estado);
             query.execute();
     }
 
@@ -63,10 +68,12 @@ public class DescuentoServiceImpl implements DescuentoService {
         query.registerStoredProcedureParameter("P_DESCUENTO_ID", Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("P_NOMBRE", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("P_PORCENTAJE", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("P_ESTADO", String.class, ParameterMode.IN);
 
         query.setParameter("P_DESCUENTO_ID", descuento.getIdDescuento());
         query.setParameter("P_NOMBRE", descuento.getNombre());
         query.setParameter("P_PORCENTAJE", descuento.getPorcentaje());
+        query.setParameter("P_ESTADO", descuento.getEstado());
 
         query.execute();
     }
@@ -74,7 +81,7 @@ public class DescuentoServiceImpl implements DescuentoService {
     @Override
     @Transactional
     public void eliminarDescuento(Long idDescuento) {
-        entityManager.createStoredProcedureQuery("FIDE_PROCEDIMIENTOS_PKG.FIDE_DESCUENTO_ELIMINAR_SP")
+        entityManager.createStoredProcedureQuery("FIDE_PROCEDIMIENTOS_PKG.FIDE_DESCUENTO_TB_ELIMINAR_SP")
                 .registerStoredProcedureParameter("P_DESCUENTO_ID", Long.class, ParameterMode.IN)
                 .setParameter("P_DESCUENTO_ID", idDescuento)
                 .execute();

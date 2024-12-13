@@ -37,8 +37,8 @@ public class ProductoController {
         var listaCategorias = categoriaService.getCategorias();
         model.addAttribute("productos", lista);
         model.addAttribute("categorias", listaCategorias);
-        model.addAttribute("inventario", new Inventario()); // Se crea un objeto de tipo Inventario para poder agregar un nuevo producto
-        model.addAttribute("producto", new Producto());// Se crea un objeto de tipo Producto para poder agregar un nuevo producto
+        model.addAttribute("inventario", new Inventario()); 
+        model.addAttribute("producto", new Producto());
         return "/productos/listado";
     }
 
@@ -51,7 +51,6 @@ public class ProductoController {
 
     @GetMapping("/eliminar/{id}")
     public String eliminarProducto(@PathVariable("id") Long idProducto) {
-        //imprimir en consola para pruebas
         System.out.println("idProducto: " + idProducto);
         productoService.eliminarProducto(idProducto);
         return "redirect:/productos";

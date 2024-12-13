@@ -75,7 +75,6 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripción</th>
-                        <th scope="col">Imagen</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -84,7 +83,6 @@
                         <th scope="row" th:text="${servicio.idServicio}">1</th>
                         <td th:text="${servicio.nombre}">Nombrel servicio</td>
                         <td th:text="${servicio.descripcion}">Descripción del servicio</td>
-                        <td th:text="${servicio.imagen}">Imagen del servicio</td>
                         <td>
                             <a class="btn btn-sm btn-primary"
                                th:href="@{/servicios/editar/{id}(id=${servicio.idServicio})}"><i

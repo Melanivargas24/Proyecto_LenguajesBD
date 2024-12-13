@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Cosa Verde</title>
+    <meta charset="UTF-8" />
+    <!-- Incluye Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Incluye el archivo CSS -->
+    <link th:href="@{/css/catalogo.css}" rel="stylesheet" />
+    <script th:src="@{/js/script.js}" th:defer="defer"></script>
+</head>
+
+<body>
+    <section th:fragment="contenidoCatalogo" class="contenedor my-4">
+          <div id="resultsBlock"></div>
+        <h1 class="titulo-catalogo text-center mb-4">Catálogo</h1>
+        <!-- Fila de tarjetas -->
+        <div class="fila">
+            <!-- Card de cada producto -->
+            <div th:each="producto : ${productos}" class="columna-lg-3 columna-md-4 columna-sm-6">
+                <div class="tarjeta">
+                    <img th:src="${producto.imagen}" class="imagen-tarjeta" alt="Imagen del producto">
+                    <div class="cuerpo-tarjeta">
+                        <h5 th:text="${producto.nombre}">Nombre del Producto</h5>
+                        <p th:text="${producto.descripcion}">Descripción del Producto</p>
+                        <p>
+                            <strong th:text="${#numbers.formatDecimal(producto.precio_unit, 0, 'COMMA', 2, 'POINT')}">
+                                ₡105620.00
+                            </strong>
+                        </p>
+                        <p th:text="${producto.categoria.nombre}">Categoría del Producto</p>
+                        <button class="boton-principal" onclick="addCard(this.form)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    
+    <div th:fragment="verCarrito" th:unless="${#lists.isEmpty(listaItems)}"> 
+            <form action="/carrito/listado" class="circle-button-container">
+                <button type="submit" class="circle-button">
+                    [[${listaTotal}]]
+                </button>
+            </form>
+        </div>
+        
+ 
+    <section th:fragment="listadoCarrito" id="items">
+    <div class="container">
+        <h1 style="font-size: 45px;">Carrito</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <div class="card-container-custom">
+                    <!-- Loop through items -->
+                    <div class="card-custom" th:each="carrito, contador : ${productos}">
+                        <div class="card">
+                            <div class="card-body-custom">
+                                <div class="img"><img th:src="${carrito.producto.imagen}" alt="Imagen del producto"/></div>
+                                <div class="title-and-description">
+                                <h2 class="card-title-custom" style="margin-bottom: 10px; font-size:20px; font-weight: bold;">[[${carrito.producto.nombre}]]</h2>
+                                <h5 class="card-title-custom">[[${carrito.producto.descripcion}]]</h5>
+                            </div>
+                                <p class="card-text-custom">$[[${carrito.producto.precio_unit}]]</p>
+                                 <p class="card-text-custom">Cantidad: [[${carrito.cantidad}]]</p>
+                                <a th:href="@{/carrito/eliminar/}+${carrito.producto.idProducto}" class="btn-custom btn-danger-custom"> <i class='fas fa-trash'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End loop -->
+                    <div class="text-carrito" th:if="${#lists.isEmpty(productos)}">
+                        No hay elementos en el carrito
+                    </div>
+                </div>
+            </div>
+          
+            <div class="col-md-3">
+               <div class="mini-table">
+                    <table>
+                        <tr>
+                            <td>Subtotal: </td>
+                            <td>$[[${carritoTotal}]]</td>
+                        </tr>
+                        <tr>
+                            <td>Total: </td>
+                            <td>$[[${carritoTotal}]]</td>
+                        </tr>
+                    </table>
+               </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <section th:fragment="facturarCarrito" id="facturar"> 
+    <div class="text-center bg-info text-white mb-3">
+        <div class="card-body">
+            <form th:action="@{/facturar/carrito}" method="post">
+                <!-- Selector para elegir el método de pago -->
+                <div class="form-group">
+                    <label for="idMetodoPago">Método de Pago</label>
+                    <select id="idMetodoPago" name="idMetodoPago" class="form-control">
+                        <option value="" disabled selected>Selecciona un método de pago</option>
+                        <option th:each="metodo : ${metodosPago}" 
+                                th:value="${metodo.idMetodoPago}" 
+                                th:text="${metodo.nombre}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-buy">
+                    <i class="fas fa-forward"></i> Buy
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+        
+       
+
+
+        
+    </body>
+</html>

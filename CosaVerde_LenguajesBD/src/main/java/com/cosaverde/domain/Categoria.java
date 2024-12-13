@@ -1,13 +1,13 @@
 
 package com.cosaverde.domain;
 
-
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.*;
-
 import lombok.Data;
 
 @Data
@@ -27,10 +27,3 @@ public class Categoria implements Serializable {
     private List<Producto> productos;
 }
 
-/*
-    CREATE TABLE tab_categoria(
-	id_categoria NUMBER NOT NULL,
-	nombre varchar2(50) NOT NULL,
-    PRIMARY KEY (id_categoria)
-    );
-*/ 

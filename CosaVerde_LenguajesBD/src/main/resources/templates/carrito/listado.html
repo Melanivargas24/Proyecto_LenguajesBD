@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Cosa Verde</title>
+    </head>
+    <body>
+        <div th:replace="~{layout/plantilla :: navTabs}"/>
+        <section th:replace="~{carrito/fragmentos :: listadoCarrito}"/>
+         <section th:replace="~{carrito/fragmentos :: facturarCarrito}"/>
+         <footer th:replace="~{layout/plantilla :: footer}"/> 
+       
+    </body>
+</html>

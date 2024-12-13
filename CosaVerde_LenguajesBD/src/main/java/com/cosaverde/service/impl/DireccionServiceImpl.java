@@ -5,16 +5,18 @@
 package com.cosaverde.service.impl;
 
 
-import javax.persistence.*;
 
 import com.cosaverde.dao.DireccionDao;
+import com.cosaverde.domain.Canton;
 import com.cosaverde.domain.Direccion;
+import com.cosaverde.domain.Distrito;
+import com.cosaverde.domain.Provincia;
 import com.cosaverde.service.DireccionService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.StoredProcedureQuery;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
-import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,4 +52,23 @@ public class DireccionServiceImpl implements DireccionService {
         List<Direccion> result = query.getResultList();
         return result.isEmpty() ? null : result.get(0);
     }
+    
+ @Override
+    public void save(Direccion direccion) {
+        direccionDao.save(direccion);
+    }
+
+    public Provincia findProvincia(Long provinciaId) {
+        return entityManager.find(Provincia.class, provinciaId);
+
+    }
+
+    public Canton findCanton(Long cantonId) {
+        return entityManager.find(Canton.class, cantonId);
+    }
+
+    public Distrito findDistrito(Long distritoId) {
+        return entityManager.find(Distrito.class, distritoId);
+    }
+
 }

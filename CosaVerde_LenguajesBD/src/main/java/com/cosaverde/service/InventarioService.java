@@ -12,9 +12,9 @@ public interface InventarioService {
 
     public Inventario getInventarioPorId(Long idInventario);
 
-    void insertarInventario(int stock, Date fechaVencimiento, int diasEnStock, double precioUnit, Long idEstado, Long idProducto);
+    void insertarInventario(int stock, int diasEnStock, Long idEstado, Long idProducto);
     
-    void actualizarInventario(Long idInventario, int stock, Date fechaVencimiento, int diasEnStock, double precioUnit, Long idEstado, Long idProducto);
+    void actualizarInventario(Long idInventario, int stock,  int diasEnStock,  Long idEstado, Long idProducto);
     
     void eliminarInventario(Long idInventario);
     

@@ -21,15 +21,14 @@ public class CatalogoController {
     @Autowired
     private CategoriaService categoriaService;
     
-    // Método para mostrar el catálogo completo
     @GetMapping
     public String catalogo(Model model) {
         var lista = productoService.getProductos();
         var listaCategorias = categoriaService.getCategorias();
         model.addAttribute("productos", lista);
         model.addAttribute("categorias", listaCategorias);
-        model.addAttribute("producto", new Producto()); // Crear un objeto Producto si se desea agregar un nuevo producto
-        return "/catalogo/listado"; // Regresar a la página del catálogo
+        model.addAttribute("producto", new Producto()); 
+        return "/catalogo/listado"; 
     }
 
 }

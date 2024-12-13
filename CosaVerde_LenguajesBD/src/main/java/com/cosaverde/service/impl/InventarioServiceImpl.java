@@ -7,16 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cosaverde.dao.InventarioDao;
 import com.cosaverde.domain.Inventario;
 import com.cosaverde.service.InventarioService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.StoredProcedureQuery;
 import java.math.BigDecimal;
 import java.util.Date;
-
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.StoredProcedureQuery;
 
 @Service
 public class InventarioServiceImpl implements InventarioService {
@@ -53,44 +51,34 @@ public class InventarioServiceImpl implements InventarioService {
 
     @Override
     @Transactional
-    public void insertarInventario(int stock, Date fechaVencimiento, int diasEnStock, double precioUnit, 
-            Long idEstado, Long idProducto) {
+    public void insertarInventario(int stock, int diasEnStock, Long idEstado, Long idProducto) {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_PROCEDIMIENTOS_PKG.FIDE_INVENTARIO_TB_INSERT_SP");
         query.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(2, Date.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(3, Integer.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(4, Double.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(5, Long.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(6, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(3, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(4, Long.class, ParameterMode.IN);
         query.setParameter(1, stock);
-        query.setParameter(2, fechaVencimiento);
-        query.setParameter(3, diasEnStock);
-        query.setParameter(4, precioUnit);
-        query.setParameter(5, idEstado);
-        query.setParameter(6, idProducto);
+        query.setParameter(2, diasEnStock);
+        query.setParameter(3, idEstado);
+        query.setParameter(4, idProducto);
         query.execute();
     }
     
 
     @Override
     @Transactional
-    public void actualizarInventario(Long idInventario, int stock, Date fechaVencimiento, int diasEnStock, 
-            double precioUnit, Long idEstado, Long idProducto) {
+    public void actualizarInventario(Long idInventario, int stock, int diasEnStock, Long idEstado, Long idProducto) {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_PROCEDIMIENTOS_PKG.FIDE_INVENTARIO_TB_ACTUALIZAR_SP");
         query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
         query.registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(3, Date.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(4, Integer.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(5, Double.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(6, Long.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter(7, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(3, Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(4, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(5, Long.class, ParameterMode.IN);
         query.setParameter(1, idInventario);
         query.setParameter(2, stock);
-        query.setParameter(3, fechaVencimiento);
-        query.setParameter(4, diasEnStock);
-        query.setParameter(5, precioUnit);
-        query.setParameter(6, idEstado);
-        query.setParameter(7, idProducto);
+        query.setParameter(3, diasEnStock);
+        query.setParameter(4, idEstado);
+        query.setParameter(5, idProducto);
         query.execute();
     }
     

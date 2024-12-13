@@ -25,7 +25,6 @@
                      <th scope="col">Descripcion</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Hora</th>
-                    <th scope="col">Imagen</th>
                     <th scope="col">Precio</th>
                     <th scope="col">Capacidad</th>
                     <th scope="col">Tipo de Curso</th>
@@ -40,7 +39,6 @@
                     <td th:text="${curso.descripcion}">Descripcion</td>
                     <td th:text="${#dates.format(curso.fecha, 'yyyy-MM-dd')}">Fecha</td>
                     <td th:text="${curso.hora}">Hora</td>
-                    <td th:text="${curso.imagen}">Imagen del servicio</td>
                     <td th:text="${curso.precio}">Precio</td>
                     <td th:text="${curso.capacidad}">Capacidad</td>
                     <td th:text="${curso.tipocurso.nombre}">Tipo de Curso</td>

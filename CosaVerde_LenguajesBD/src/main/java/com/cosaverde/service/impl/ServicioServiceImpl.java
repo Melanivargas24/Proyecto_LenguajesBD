@@ -6,8 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cosaverde.service.ServicioService;
 import com.cosaverde.dao.ServicioDao;
 import com.cosaverde.domain.Servicio;
-
-import javax.persistence.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.StoredProcedureQuery;
 
 @Service
 public class ServicioServiceImpl implements ServicioService {

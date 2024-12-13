@@ -2,16 +2,16 @@ package com.cosaverde.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
-import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cosaverde.dao.ProductoDao;
 import com.cosaverde.domain.Producto;
 import com.cosaverde.service.ProductoService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.StoredProcedureQuery;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
@@ -91,5 +91,65 @@ public class ProductoServiceImpl implements ProductoService {
                 .execute();
     }
     
+    ///Funciones del carrito
+    
 
+  @Override
+    public void agregarProductoCarrito(Long usuarioId, Long productoId, int cantidad) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_CARRITO_PKG.AGREGAR_PRODUCTO_CARRITO");
+        query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(2, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(3, Integer.class, ParameterMode.IN);
+        
+        query.setParameter(1, usuarioId);
+        query.setParameter(2, productoId);
+        query.setParameter(3, cantidad);
+        
+        query.execute();
+    }
+
+    @Override
+    public void eliminarProductoCarrito(Long usuarioId, Long productoId) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_CARRITO_PKG.ELIMINAR_PRODUCTO_CARRITO");
+        query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(2, Long.class, ParameterMode.IN);
+        
+        query.setParameter(1, usuarioId);
+        query.setParameter(2, productoId);
+        
+        query.execute();
+    }
+
+    @Override
+    public void generarFactura(Long usuarioId, Long metodoPagoId) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_CARRITO_PKG.GENERAR_FACTURA");
+        query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(2, Long.class, ParameterMode.IN);
+        
+        query.setParameter(1, usuarioId);
+        query.setParameter(2, metodoPagoId);
+        
+        query.execute();
+    }
+
+    @Override
+    public List<Producto> obtenerCarrito(Long usuarioId) {
+        // Implementar lógica para obtener productos del carrito
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_CARRITO_PKG.FIDE_CARRITO_TB_OBTENER_SP");
+        query.registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR);
+        query.execute();
+        return query.getResultList();
+    }
+
+    @Override
+    public double calcularSubtotal(Long usuarioId) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("FIDE_CARRITO_PKG.CALCULAR_SUBTOTAL_CARRITO");
+        query.registerStoredProcedureParameter(1, Long.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter(2, Double.class, ParameterMode.OUT);
+        
+        query.setParameter(1, usuarioId);
+        query.execute();
+        
+        return (Double) query.getOutputParameterValue(2);
+    }
 }

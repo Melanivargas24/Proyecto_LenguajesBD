@@ -13,7 +13,7 @@ public class FAQController {
     @GetMapping("/faq")
     public String getFAQ(Model model) {
         model.addAttribute("questions", getFAQList());
-        return "faq"; // Nombre de la vista faq.html
+        return "faq"; 
     }
 
     private List<FAQ> getFAQList() {

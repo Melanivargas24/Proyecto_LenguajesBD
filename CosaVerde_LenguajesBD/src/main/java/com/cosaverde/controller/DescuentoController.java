@@ -33,7 +33,7 @@ public class DescuentoController {
     @PostMapping("/agregar")
     public String agregarDescuento(@ModelAttribute Descuento descuento) {
         descuentoService.crearDescuento( descuento.getNombre(),
-                descuento.getPorcentaje());
+                descuento.getPorcentaje(), descuento.getEstado());
         return "redirect:/descuentos";
     }
     

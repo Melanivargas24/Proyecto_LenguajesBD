@@ -50,18 +50,8 @@
                                                placeholder="Ingrese la cantidad disponible del producto" min="0" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="fechaInventario">Fecha de vencimiento</label>
-                                        <input type="date" class="form-control" th:field="*{fechaVencimiento}" 
-                                               placeholder="Seleccione la fecha de vencimiento" required>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="díasStock">Días en Stock</label>
                                         <textarea class="form-control" th:field="*{diasEnStock}" rows="2" placeholder="Número de días en stock" required></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="precioInventario">Precio Unitario</label>
-                                        <input type="number" class="form-control" th:field="*{precioUnit}"
-                                               placeholder="Ingrese la precio unitario del producto" min="0" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="estadoInventario">Estado</label>
@@ -89,7 +79,6 @@
                     <th scope="col">ID</th>
                     <th scope="col">Producto</th>
                     <th scope="col">Stock</th>
-                    <th scope="col">Fecha de vencimiento</th>
                     <th scope="col"># Días en Stock</th>
                     <th scope="col">Precio Unitario</th>
                     <th scope="col">Estado</th>
@@ -101,9 +90,8 @@
                     <td th:text="${inventario.idInventario}">1</td>
                     <td th:text="${inventario.producto.nombre}">Nombre del Producto</td>
                     <td th:text="${inventario.stock}">Stock</td>
-                    <td th:text="${#dates.format(inventario.fechaVencimiento, 'yyyy-MM-dd')}">Fecha Vencimiento</td>
                     <td th:text="${inventario.diasEnStock}"># Días en Stock</td>
-                    <td th:text="${inventario.precioUnit}">Precio unitario</td>
+                    <td th:text="${inventario.producto.precio_unit}">Precio unitario</td>
                     <td th:text="${inventario.estado.nombre}">Estado</td>
                     <td>
                         <a class="btn btn-sm btn-primary"
@@ -153,18 +141,8 @@
                            placeholder="Ingrese la cantidad disponible del producto" min="0">
                 </div>
                 <div class="form-group1">
-                    <label for="fechaInventario">Fecha de vencimiento</label>
-                    <input type="date" class="form-control" th:field="*{fechaVencimiento}" 
-                           placeholder="Seleccione la fecha de vencimiento" required>
-                </div>
-                <div class="form-group1">
                     <label for="díasStock">Días en Stock</label>
                     <textarea class="form-control" th:field="*{diasEnStock}" rows="2" placeholder="Número de días en stock" required></textarea>
-                </div>
-                <div class="form-group1">
-                    <label for="precioInventario">Precio Unitario</label>
-                    <input type="number" class="form-control" th:field="*{precioUnit}"
-                           placeholder="Ingrese la precio unitario del producto" min="0" required>
                 </div>
                 <div class="form-group1">
                     <label for="estadoInventario">Estado</label>
@@ -181,10 +159,9 @@
             $('form').submit(function(event) {
                 var producto = $('#productoInventario').val();
                 var stock = $('#stockInventario').val();
-                var fechaVencimiento = $('#fechaInventario').val();
+                
                 var diasEnStock = $('#díasStock').val();
-                var precioUnit = $('#precioInventario').val();
-                if (!producto || !stock || !fechaVencimiento || !diasEnStock || !precioUnit) {
+                if (!producto || !stock ||  !diasEnStock ) {
                     event.preventDefault();  
                     alert('Por favor, complete todos los campos antes de enviar el formulario.');
                 }

@@ -70,8 +70,7 @@ public class InventarioController {
                 return "redirect:/inventarios";
             }
         }
-        inventarioService.insertarInventario(inventario.getStock(), 
-                inventario.getFechaVencimiento() , inventario.getDiasEnStock(), inventario.getPrecioUnit(), 
+        inventarioService.insertarInventario(inventario.getStock(), inventario.getDiasEnStock(), 
                 inventario.getEstado().getIdEstado(), inventario.getProducto().getIdProducto());
         return "redirect:/inventarios";
     }
@@ -98,8 +97,7 @@ public class InventarioController {
     @PostMapping("/editar")
     public String actualizar(Inventario inventario) {
         inventarioService.actualizarInventario(inventario.getIdInventario(), inventario.getStock(), 
-                inventario.getFechaVencimiento() , inventario.getDiasEnStock(), inventario.getPrecioUnit(), 
-                inventario.getEstado().getIdEstado(), inventario.getProducto().getIdProducto());
+                 inventario.getDiasEnStock(), inventario.getEstado().getIdEstado(), inventario.getProducto().getIdProducto());
         return "redirect:/inventarios";
     }
 

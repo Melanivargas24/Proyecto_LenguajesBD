@@ -7,8 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cosaverde.service.CategoriaService;
 import com.cosaverde.dao.CategoriaDao;
 import com.cosaverde.domain.Categoria;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.StoredProcedureQuery;
 
-import javax.persistence.*;
+
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService {

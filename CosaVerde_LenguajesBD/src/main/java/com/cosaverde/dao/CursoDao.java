@@ -4,8 +4,6 @@
  */
 package com.cosaverde.dao;
 import com.cosaverde.domain.Curso;
-
-import com.cosaverde.domain.Curso;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

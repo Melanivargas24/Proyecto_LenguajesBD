@@ -1,13 +1,12 @@
 package com.cosaverde.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.*;
-
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -21,6 +20,7 @@ public class Descuento implements Serializable {
     private Long idDescuento;
     private String nombre;
     private int porcentaje;
+    String estado;
 
    
 
